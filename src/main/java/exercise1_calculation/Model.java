@@ -1,4 +1,4 @@
-package exercise1;
+package exercise1_calculation;
 
 public class Model {
     public double calculation(double a, double b, String operator){

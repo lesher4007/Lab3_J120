@@ -1,4 +1,4 @@
-package exercise1;
+package exercise1_calculation;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
