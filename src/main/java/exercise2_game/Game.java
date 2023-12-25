@@ -6,8 +6,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-
 import java.util.*;
 
 public class Game extends Application {
@@ -92,9 +90,6 @@ public class Game extends Application {
         }
     }
 
-
-
-
     @Override
     public void start(Stage stage) throws Exception {
 
@@ -154,7 +149,6 @@ public class Game extends Application {
 
         Button startGame =new Button("New game");
         startGame.setMinSize(400,100);
-
 
         HBox root1 = new HBox();
         root1.getChildren().addAll(button1,button2,button3,button4);
@@ -254,11 +248,9 @@ public class Game extends Application {
         startGame.setOnAction(event -> { newGame(arrButton);
         });
 
-
         arrButton = new Button[]{button1, button2, button3, button4, button5, button6, button7, button8, button9, button10, button11, button12, button13, button14, button15, button16};
         int var = gen.indexOf(0);
         arrButton[var].setStyle("-fx-background-color: white");
-
 
         Scene scene = new Scene(rootMain,400,500);
         stage.setTitle("Game");
