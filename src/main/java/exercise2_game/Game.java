@@ -1,7 +1,6 @@
 package exercise2_game;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
@@ -63,11 +62,43 @@ public class Game extends Application {
 
     }
 
+    public void newGame(Button[] arrButton){
+        List<Integer> gen=generator();
+        int var = 0;
+        for(Button button:arrButton){
+            button.setText(gen.get(var).toString());
+            if (gen.get(var)==0){
+                button.setStyle("-fx-background-color: white");
+            } else {
+                button.setStyle(null);
+            }
+            var++;
+        }
+    }
+
+    public void endGame(Button[] arrButton){
+        int var=0;
+        int count = 0;
+        Integer[] winArr = {1, 2, 3, 4, 5, 6,7,8,9,10,11,12,13,14,15,0};
+        for(Button button:arrButton){
+            if(button.getText().equals(winArr[var].toString())){
+                count++;
+            }
+            var++;
+        }
+        if(count == 16) {
+            WinStage winStage = new WinStage();
+            winStage.init().show();
+        }
+    }
+
+
+
+
     @Override
     public void start(Stage stage) throws Exception {
 
         List<Integer> gen=generator();
-        System.out.println(gen);
 
         Button button1 = new Button();
         button1.setMinSize(100,100);
@@ -121,6 +152,10 @@ public class Game extends Application {
         button16.setMinSize(100,100);
         button16.setText(gen.get(15).toString());
 
+        Button startGame =new Button("New game");
+        startGame.setMinSize(400,100);
+
+
         HBox root1 = new HBox();
         root1.getChildren().addAll(button1,button2,button3,button4);
         HBox root2 = new HBox();
@@ -130,85 +165,102 @@ public class Game extends Application {
         HBox root4 = new HBox();
         root4.getChildren().addAll(button13,button14,button15,button16);
         VBox rootMain = new VBox();
-        rootMain.getChildren().addAll(root1,root2,root3,root4);
+        rootMain.getChildren().addAll(root1,root2,root3,root4,startGame);
 
         button1.setOnAction(event -> { moveNumber(button1,button2);
             moveNumber(button1,button5);
+            endGame(arrButton);
         });
         button2.setOnAction(event -> { moveNumber(button2,button1);
             moveNumber(button2,button3);
             moveNumber(button2,button6);
+            endGame(arrButton);
         });
         button3.setOnAction(event -> { moveNumber(button3,button2);
             moveNumber(button3,button4);
             moveNumber(button3,button7);
+            endGame(arrButton);
         });
         button4.setOnAction(event -> { moveNumber(button4,button3);
             moveNumber(button4,button8);
+            endGame(arrButton);
         });
 
         button5.setOnAction(event -> { moveNumber(button5,button1);
             moveNumber(button5,button6);
             moveNumber(button5,button9);
+            endGame(arrButton);
         });
         button6.setOnAction(event -> { moveNumber(button6,button2);
             moveNumber(button6,button5);
             moveNumber(button6,button7);
             moveNumber(button6,button10);
+            endGame(arrButton);
         });
         button7.setOnAction(event -> { moveNumber(button7,button3);
             moveNumber(button7,button6);
             moveNumber(button7,button8);
             moveNumber(button7,button11);
+            endGame(arrButton);
         });
         button8.setOnAction(event -> { moveNumber(button8,button4);
             moveNumber(button8,button7);
             moveNumber(button8,button12);
+            endGame(arrButton);
         });
 
         button9.setOnAction(event -> { moveNumber(button9,button5);
             moveNumber(button9,button10);
             moveNumber(button9,button13);
+            endGame(arrButton);
         });
         button10.setOnAction(event -> { moveNumber(button10,button6);
             moveNumber(button10,button9);
             moveNumber(button10,button11);
             moveNumber(button10,button14);
+            endGame(arrButton);
         });
         button11.setOnAction(event -> { moveNumber(button11,button7);
             moveNumber(button11,button10);
             moveNumber(button11,button12);
             moveNumber(button11,button15);
+            endGame(arrButton);
         });
         button12.setOnAction(event -> { moveNumber(button12,button8);
             moveNumber(button12,button11);
             moveNumber(button12,button16);
+            endGame(arrButton);
         });
 
         button13.setOnAction(event -> { moveNumber(button13,button9);
             moveNumber(button13,button14);
+            endGame(arrButton);
         });
         button14.setOnAction(event -> { moveNumber(button14,button10);
             moveNumber(button14,button13);
             moveNumber(button14,button15);
+            endGame(arrButton);
         });
         button15.setOnAction(event -> { moveNumber(button15,button11);
             moveNumber(button15,button14);
             moveNumber(button15,button16);
+            endGame(arrButton);
         });
         button16.setOnAction(event -> { moveNumber(button16,button12);
             moveNumber(button16,button15);
+            endGame(arrButton);
+        });
+
+        startGame.setOnAction(event -> { newGame(arrButton);
         });
 
 
         arrButton = new Button[]{button1, button2, button3, button4, button5, button6, button7, button8, button9, button10, button11, button12, button13, button14, button15, button16};
-
         int var = gen.indexOf(0);
-
         arrButton[var].setStyle("-fx-background-color: white");
 
 
-        Scene scene = new Scene(rootMain,400,400);
+        Scene scene = new Scene(rootMain,400,500);
         stage.setTitle("Game");
         stage.setScene(scene);
         stage.show();
